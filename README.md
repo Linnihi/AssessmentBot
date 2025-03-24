@@ -12,6 +12,7 @@ A Streamlit-based mental health assessment chatbot that uses OpenAI's API to pro
 - Export conversation history
 - Multiple GPT model options
 - Culturally sensitive and ethical mental health assessment
+- Customizable prompts and settings via JSON5 configuration
 
 ## Requirements
 
@@ -37,13 +38,50 @@ streamlit run app.py
 
 2. Open your web browser and navigate to the URL shown in the terminal (typically http://localhost:8501)
 
-3. Enter your OpenAI API key in the sidebar
+3. Enter your OpenAI API key in the sidebar (if not provided in configuration)
    - Note: Your API key is not stored and is only used for the current session
    - You can get an API key from [OpenAI's website](https://platform.openai.com/api-keys)
+   - Alternatively, you can include your API key in the configuration file
 
 4. (Optional) Upload relevant documents (PDF or DOCX) to provide context for the assessment
 
 5. Start the conversation with the AI assistant
+
+## Customization
+
+The application supports customization through a JSON5 configuration file. You can modify:
+- Title of the application
+- System role and behavior
+- Initial conversation message
+- Context template for document integration
+- OpenAI API key (optional)
+
+To customize:
+1. Download the current configuration using the "Download Current Configuration" button
+2. Modify the JSON5 file as needed (supports comments and other JSON5 features)
+3. Upload your modified configuration file in the sidebar
+
+Example configuration (JSON5 format):
+```json5
+{
+    // Title of the application shown in the browser tab and header
+    "title": "Your Title",
+
+    // The system role defines the AI's behavior and personality
+    "system_role": "Your System Role",
+
+    // The initial message shown when the conversation starts
+    "initial_conversation": "Your Initial Message",
+
+    // Template for formatting context when documents are uploaded
+    // {knowledge_base} will be replaced with the content of uploaded documents
+    // {user_input} will be replaced with the user's message
+    "context_template": "Your Context Template",
+
+    // OpenAI API key (optional)
+    "api_key": "your-api-key-here"
+}
+```
 
 ## Usage
 
@@ -74,4 +112,4 @@ The application supports multiple GPT models:
 
 - API keys are not stored and are only used for the current session
 - All conversations are local to your browser
-- Document uploads are processed locally and not stored 
+- Document uploads are processed locally and not stored
